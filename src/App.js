@@ -105,27 +105,19 @@ class GAForm extends React.Component{
         <div>
           {console.log(typeof this.state.returnPlan)}
           
-          {/* <p>{console.log(this.state.returnPlan)}</p> */}
-          {/* {Object.keys(this.state.returnPlan).map((key) => {
+          <p>{console.log(this.state.returnPlan)}</p>
+          {Object.keys(this.state.returnPlan).map((key) => {
             console.log(this.state.returnPlan[key])
             if (key === "workingdays"){
               console.log("Found days")
-             Object.keys(key).map((day) => {
-               console.log("Inside workingDays")
-               Object.keys(day).map((single_day) => {
-                 console.log("Inside single day")
-                 Object.keys(single_day).map((dayExercises) => {
-                   if (dayExercises === "exercises") {
-                     console.log("inside exercises")
-                     Object.keys(dayExercises).map((exercise) => {
-                       console.log('ploop')
-                     })
-                   }
-                 })
-               })
-             }) 
+              console.log(this.state.returnPlan[key])
+              Object.keys(this.state.returnPlan[key]).map((newkey) => {
+                console.log("ploop, pleep, plop")
+                console.log(this.state.returnPlan.key[newkey])
+              })
+             
             }}
-          )} */}
+          )}
         </div>
         
       </div>
