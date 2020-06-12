@@ -60,7 +60,6 @@ class GAForm extends React.Component{
     })
     .then(res => {
         // var plan = JSON.parse(res.data);
-        console.log(typeof res.data)
         this.setState({returnPlan: res.data});
         // console.log(this.state.returnPlan);
         // <ExResults Explan = {res.data} />
@@ -103,21 +102,32 @@ class GAForm extends React.Component{
           <input type='submit'/>
         </form>
         <div>
-          {console.log(typeof this.state.returnPlan)}
           
-          <p>{console.log(this.state.returnPlan)}</p>
-          {Object.keys(this.state.returnPlan).map((key) => {
-            console.log(this.state.returnPlan[key])
-            if (key === "workingdays"){
-              console.log("Found days")
-              console.log(this.state.returnPlan[key])
-              Object.keys(this.state.returnPlan[key]).map((newkey) => {
-                console.log("ploop, pleep, plop")
-                console.log(this.state.returnPlan.key[newkey])
-              })
-             
-            }}
-          )}
+          <h1>Welcome, you piece of shit.</h1>
+          
+          {
+            this.state.returnPlan.map((plan, i) =>
+              // return();
+              {
+                // var i = 0
+                
+                return (
+                  <div> 
+                    <h3>Day {i+1}, Day Type: {plan.day_type}</h3>
+                    {plan.day.map((exercise) => 
+                      <div>
+                        <h4>{exercise.day_type}</h4>
+                        <ul>
+                          <li>{exercise.ex_name}</li>
+                          <li>Equipment: {exercise.equipment}</li>
+                          <li>Main Muscle: {exercise.main_muscle}</li>
+                          <li>reps: {exercise.reps} sets: {exercise.sets}</li>
+                        </ul>
+                    </div>
+                )}
+              </div>)
+             })
+          }
         </div>
         
       </div>
