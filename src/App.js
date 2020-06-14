@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import '@fluentui/react';
 
 function App() {
   // used to make an api call
@@ -107,13 +108,11 @@ class GAForm extends React.Component{
           
           {
             this.state.returnPlan.map((plan, i) =>
-              // return();
-              {
-                // var i = 0
-                
+              { 
                 return (
                   <div> 
-                    <h3>Day {i+1}, Day Type: {plan.day_type}</h3>
+                    <h3>Day {i+1}</h3>
+                    <h4>{plan.day_type}</h4>
                     {plan.day.map((exercise) => 
                       <div>
                         <h4>{exercise.day_type}</h4>
@@ -121,7 +120,7 @@ class GAForm extends React.Component{
                           <li>{exercise.ex_name}</li>
                           <li>Equipment: {exercise.equipment}</li>
                           <li>Main Muscle: {exercise.main_muscle}</li>
-                          <li>reps: {exercise.reps} sets: {exercise.sets}</li>
+                          <li>Reps: {exercise.reps} Sets: {exercise.sets}</li>
                         </ul>
                     </div>
                 )}
