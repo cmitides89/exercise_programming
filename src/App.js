@@ -3,32 +3,20 @@ import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-import '@fluentui/react';
+import {PrimaryButton} from 'office-ui-fabric-react';
+import {loadTheme} from '@fluentui/react';
+
+
+// import {initializeIcons} from '@uifabric/icons';
 
 function App() {
-  // used to make an api call
-  // useEffect(() => {
-  //   fetch('/ga_form').then(response => 
-  //     response.json().then(data => {
-  //       console.log(data);
-  //     })
-  //   );
-  // },[])
+ 
   return (
     <div className="App">
       <GAForm />
       {/* <ExResults /> */}
     </div>
   );
-}
-
-// class ExResults extends React.Component{
-//   render(){
-//     return <div>{this.props.Explan}</div>;
-//   }
-// }
-function ExResults(props){
-  return <div>{props}</div>
 }
 
 class GAForm extends React.Component{
@@ -100,7 +88,7 @@ class GAForm extends React.Component{
           </select>
           
           <br></br>
-          <input type='submit'/>
+          <PrimaryButton type='submit'> Create </PrimaryButton>
         </form>
         <div>
           
