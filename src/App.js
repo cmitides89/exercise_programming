@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-import '@fluentui/react';
+import {PrimaryButton} from '@fluentui/react';
 
 function App() {
   // used to make an api call
@@ -71,7 +71,7 @@ class GAForm extends React.Component{
     // const {NumberOfDays, LevelOfExp, goalType, NumberOfExercises, returnPlan} = this.state;
     
     return (
-      <div>
+      <div class="ms-Grid" dir="ltr">
         <form onSubmit={this.onSubmit} action="/ga_form">
           <h4>Number of Days</h4>
           <select name="NumberOfDays" value={this.state.NumberOfDays} onChange={this.onChange}>
