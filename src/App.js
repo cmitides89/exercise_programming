@@ -3,17 +3,29 @@ import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+// import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import  Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import {FormControl, FormGroup} from 'react-bootstrap/FormControl';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import CardDeck from 'react-bootstrap/CardDeck';
+import ListGroup from 'react-bootstrap/ListGroup';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 
-// import {initializeIcons} from '@uifabric/icons';
+// TODO: customize boostrap colors using $theme-colors in a custom scss file
 
 function App() {
  
   return (
-    <div className="App">
+    <Container className="App">
       <GAForm />
       {/* <ExResults /> */}
-    </div>
+    </Container>
   );
 }
 
@@ -57,65 +69,85 @@ class GAForm extends React.Component{
     // const {NumberOfDays, LevelOfExp, goalType, NumberOfExercises, returnPlan} = this.state;
     
     return (
-      <div class="ms-Grid" dir="ltr">
-        <form onSubmit={this.onSubmit} action="/ga_form">
-          <h4>Number of Days</h4>
-          <select name="NumberOfDays" value={this.state.NumberOfDays} onChange={this.onChange}>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-          <h4>Experience</h4>
-          <select name="LevelOfExp" value={this.state.LevelOfExp} onChange={this.onChange}>
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
-          </select>
-          <h4>Goal</h4>
-          <select name="goalType" value={this.state.goalType} onChange={this.onChange}>
-            <option value="hypertrophy">Hypertrophy</option>
-            <option value="strength">Strength</option>
-          </select>
-          <h4>Number of Exercises</h4>
-          <select name="NumberOfExercises" value={this.state.NumberOfExercises} onChange={this.onChange}>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-          </select>
-          
-          <br></br>
-          <submit type='submit'> Create </submit>
-        </form>
-        <div>
-          
-          <h1>Welcome, you piece of shit.</h1>
-          
-          {
-            this.state.returnPlan.map((plan, i) =>
-              { 
-                return (
-                  <div> 
-                    <h3>Day {i+1}</h3>
-                    <h4>{plan.day_type}</h4>
-                    {plan.day.map((exercise) => 
-                      <div>
-                        <h4>{exercise.day_type}</h4>
-                        <ul>
-                          <li>{exercise.ex_name}</li>
-                          <li>Equipment: {exercise.equipment}</li>
-                          <li>Main Muscle: {exercise.main_muscle}</li>
-                          <li>Reps: {exercise.reps} Sets: {exercise.sets}</li>
-                        </ul>
-                    </div>
-                )}
-              </div>)
-             })
-          }
-        </div>
-        
-      </div>
+    <div className="formContainer">
+      <Form className="programForm">
+        <Form.Group as={Row} controlId="formHorizontalEmail">
+          <Form.Label column sm={7} className="textAlignLeft">
+            Number of days
+          </Form.Label>
+            <Col sm={5}>
+              <Form.Control as="Select">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </Form.Control>
+            </Col>
+        </Form.Group>
+        <Form.Group as={Row} controlId="formHorizontalPassword">
+          <Form.Label column sm={7} className="textAlignLeft">
+            Level of experience
+          </Form.Label>
+            <Col sm={5}>
+              <Form.Control as="Select">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </Form.Control>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row}>
+            <Form.Label column sm={5} className="textAlignLeft">
+              Goal Type
+            </Form.Label>
+            <Col sm={7}>
+            <Form.Control as="Select">
+              <option value="hypertrophy">Hypertrophy</option>
+              <option value="strength">Strength</option>
+            </Form.Control>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row}>
+            <Form.Label column sm={7} className="textAlignLeft">
+              Number of exercises
+            </Form.Label>
+            <Col sm={5}>
+              <Form.Control as="Select">
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+              </Form.Control>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row}>
+            <Col sm={{ span: 7, offset: 5 }}>
+              <Button type="submit">Create</Button>
+            </Col>
+          </Form.Group>
+        </Form>
+      {
+        this.state.returnPlan.map((plan,i) =>{
+          return(
+            <CardDeck>
+              <Card style={{width:'20rem'}}>
+                <Card.Header>Day {i+1}: {plan.day_type}</Card.Header>
+                <Card.Body>
+                  <Card.Title>Exercises</Card.Title>
+                  {plan.day.map((exercise) => 
+                    <ListGroup variant="flush">
+                      <ListGroup.Item>{exercise.ex_name}</ListGroup.Item>
+                    </ListGroup>
+                  )}
+                  <Button variant="primary">Modify Day</Button>
+                </Card.Body>
+              </Card>
+            </CardDeck>
+          )
+        })
+      }
+    </div>
+      
     );
   }
 }
