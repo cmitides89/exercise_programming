@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-// import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import  Container from 'react-bootstrap/Container';
@@ -29,6 +28,15 @@ function App() {
   );
 }
 
+class GAResults extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      outputPlan: this.props.returnPlan
+    }
+  }
+}
+
 class GAForm extends React.Component{
   constructor(props){
     super(props);
@@ -47,6 +55,7 @@ class GAForm extends React.Component{
 
   onSubmit = (e) => {
     // TODO: onsubmit hide the form, maybe show a loading bar, then show the results
+    console.log('pressed button')
     e.preventDefault();
     const { NumberOfDays, LevelOfExp, goalType, NumberOfExercises, returnPlan} = this.state;
     console.log(e)
@@ -60,8 +69,9 @@ class GAForm extends React.Component{
     .then(res => {
         // var plan = JSON.parse(res.data);
         this.setState({returnPlan: res.data});
-        // console.log(this.state.returnPlan);
+        console.log(this.state.returnPlan);
         // <ExResults Explan = {res.data} />
+        // <GaResults returnPlan = {returnPlan}/>;
     });
   }
 
@@ -70,13 +80,13 @@ class GAForm extends React.Component{
     
     return (
     <div className="formContainer">
-      <Form className="programForm">
-        <Form.Group as={Row} controlId="formHorizontalEmail">
+      <Form className="programForm" onSubmit={this.onSubmit} action = "/ga_form">
+        <Form.Group as={Row}>
           <Form.Label column sm={7} className="textAlignLeft">
             Number of days
           </Form.Label>
             <Col sm={5}>
-              <Form.Control as="Select">
+              <Form.Control as="select">
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -89,7 +99,7 @@ class GAForm extends React.Component{
             Level of experience
           </Form.Label>
             <Col sm={5}>
-              <Form.Control as="Select">
+              <Form.Control as="select">
                 <option value="beginner">Beginner</option>
                 <option value="intermediate">Intermediate</option>
                 <option value="advanced">Advanced</option>
@@ -101,7 +111,7 @@ class GAForm extends React.Component{
               Goal Type
             </Form.Label>
             <Col sm={7}>
-            <Form.Control as="Select">
+            <Form.Control as="select">
               <option value="hypertrophy">Hypertrophy</option>
               <option value="strength">Strength</option>
             </Form.Control>
@@ -112,7 +122,7 @@ class GAForm extends React.Component{
               Number of exercises
             </Form.Label>
             <Col sm={5}>
-              <Form.Control as="Select">
+              <Form.Control as="select">
                 <option value="4">4</option>
                 <option value="5">5</option>
                 <option value="6">6</option>
