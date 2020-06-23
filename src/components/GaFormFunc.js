@@ -1,4 +1,4 @@
-import React, {useState, setState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Form from 'react-bootstrap/Form';
 import { FormControl, FormGroup } from 'react-bootstrap/FormControl';
 import Row from 'react-bootstrap/Row';
@@ -26,7 +26,9 @@ const GaFormFunc = () => {
             'goalType':goalType,
             'NumberOfExercises':NumberOfExercises
         }).then(res => {
-            setReturnPlan(res.data);
+            const plan = res.data;
+            setReturnPlan(plan);
+            console.log(res.data)
             console.log(returnPlan)
 
         });
