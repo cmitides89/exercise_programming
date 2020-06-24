@@ -9,6 +9,7 @@ import CardDeck from 'react-bootstrap/CardDeck';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import GaResults from './GaResults';
 
 const GaFormFunc = () => {
 
@@ -20,17 +21,17 @@ const GaFormFunc = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
+        // send as object to flask backend function
         axios.post('/ga_form', {
             'NumberOfDays':NumberOfDays,
             'LevelOfExp':LevelOfExp,
             'goalType':goalType,
             'NumberOfExercises':NumberOfExercises
         }).then(res => {
-            const plan = res.data;
-            setReturnPlan(plan);
-            console.log(res.data)
-            console.log(returnPlan)
-
+            
+            return(
+                setReturnPlan(res.data)
+            );
         });
     }
     return(
@@ -85,7 +86,7 @@ const GaFormFunc = () => {
                     <Col sm={5}>
                         <Form.Control as="select"
                             onChange={event => setNumberOfExercises(event.target.value)}
-                            defaultValue={goalType}>
+                            defaultValue={NumberOfExercises}>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
@@ -99,27 +100,9 @@ const GaFormFunc = () => {
                     </Col>
                 </Form.Group>
             </Form>
-            {/* {
-                this.state.returnPlan.map((plan, i) => {
-                    return (
-                        <CardDeck>
-                            <Card style={{ width: '20rem' }}>
-                                <Card.Header>Day {i + 1}: {plan.day_type}</Card.Header>
-                                <Card.Body>
-                                    <Card.Title>Exercises</Card.Title>
-                                    {plan.day.map((exercise) =>
-                                        <ListGroup variant="flush">
-                                            <ListGroup.Item>{exercise.ex_name}</ListGroup.Item>
-                                        </ListGroup>
-                                    )}
-                                    <Button variant="primary">Modify Day</Button>
-                                </Card.Body>
-                            </Card>
-                        </CardDeck>
-                    )
-                })
-            } */}
+            <GaResults plan={returnPlan} />
         </div>
+
     )
 };
 
