@@ -19,20 +19,24 @@ const GaFormFunc = () => {
     const [NumberOfExercises, setNumberOfExercises] = useState('5');
     const [returnPlan, setReturnPlan] = useState([]);
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
-        // send as object to flask backend function
-        axios.post('/ga_form', {
-            'NumberOfDays':NumberOfDays,
-            'LevelOfExp':LevelOfExp,
-            'goalType':goalType,
-            'NumberOfExercises':NumberOfExercises
-        }).then(res => {
-            
-            return(
-                setReturnPlan(res.data)
-            );
-        });
+        try{
+            // send as object to flask backend function
+            let res = await axios.post('/ga_form', {
+                'NumberOfDays': NumberOfDays,
+                'LevelOfExp': LevelOfExp,
+                'goalType': goalType,
+                'NumberOfExercises': NumberOfExercises } );
+            // console.log(res.data);
+            setReturnPlan(res.data)
+            return returnPlan
+        }catch(err){
+            // TODO: replace this with something the user can see
+            // or reload page?
+            console.log(err);
+        }
+        
     }
     return(
         <div className="formContainer">
