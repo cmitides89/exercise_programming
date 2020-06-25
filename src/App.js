@@ -2,6 +2,7 @@ import React,{ useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import GaFormFunc from './components/GaFormFunc';
+import GaResults from './components/GaResults';
 import './App.css';
 import axios from 'axios';
 import Row from 'react-bootstrap/Row';
@@ -22,7 +23,10 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 // TODO: customize boostrap colors using $theme-colors in a custom scss file
 
 function App() {
- 
+  const [plan, setPlan] = useState(null);
+  const switchViews = () => {
+    const currView = plan != null ? <GaFormFunc /> : <GaResults />; 
+  }
   return (
     <Container className="App">
       {/* <GAForm /> */}
