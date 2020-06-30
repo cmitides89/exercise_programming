@@ -18,22 +18,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import { scryRenderedComponentsWithType } from 'react-dom/test-utils';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import GaViewSwitcher from './components/GaViewSwitcher';
 
 
 // TODO: customize boostrap colors using $theme-colors in a custom scss file
 
 function App() {
   const [plan, setPlan] = useState(null);
-  const switchViews = () => {
-    const currView = plan != null ? <GaFormFunc /> : <GaResults />; 
-  }
-  return (
-    <Container className="App">
-      {/* <GAForm /> */}
-      <GaFormFunc />
-      {/* <ExResults /> */}
+  return plan ? (
+    // <Container className="App">
+    //   <GaViewSwitcher />
+    // </Container>
+    <Container fluid className="App">
+      <GaResults plan={plan} />
     </Container>
-  );
+  ) : (
+      <Container className="App">
+          <GaFormFunc getPlan={plan => setPlan(plan)} />
+      </Container>
+    );
 }
 
 class GAResults extends React.Component{

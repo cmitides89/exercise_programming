@@ -1,23 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import Form from 'react-bootstrap/Form';
-import { FormControl, FormGroup } from 'react-bootstrap/FormControl';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
-import CardDeck from 'react-bootstrap/CardDeck';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import GaResults from './GaResults';
 
-const GaFormFunc = () => {
+const GaFormFunc = ({getPlan}) => {
 
     const [NumberOfDays, setNumberOfDays] = useState('4');
     const [LevelOfExp, setLevelOfExp] = useState('beginner');
     const [goalType, setgoalType] = useState('strength');
     const [NumberOfExercises, setNumberOfExercises] = useState('5');
-    const [returnPlan, setReturnPlan] = useState([]);
+    const [returnPlan, setReturnPlan] = useState(null);
+
+    useEffect(() => {
+        getPlan(returnPlan)
+    });
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -29,8 +27,7 @@ const GaFormFunc = () => {
                 'goalType': goalType,
                 'NumberOfExercises': NumberOfExercises } );
             // console.log(res.data);
-            setReturnPlan(res.data)
-            return returnPlan
+            return setReturnPlan(res.data)
         }catch(err){
             // TODO: replace this with something the user can see
             // or reload page?
@@ -39,7 +36,8 @@ const GaFormFunc = () => {
         
     }
     return(
-        <div className="formContainer">
+        // <div className="CenteringContainer">
+        <Row sm={12} md={12} lx={12} className="CenteringContainer">
             <Form className="programForm" onSubmit={handleSubmit} action="/ga_form">
                 <Form.Group as={Row}>
                     <Form.Label column sm={7} className="textAlignLeft">
@@ -104,8 +102,7 @@ const GaFormFunc = () => {
                     </Col>
                 </Form.Group>
             </Form>
-            <GaResults plan={returnPlan} />
-        </div>
+        </Row >
 
     )
 };
