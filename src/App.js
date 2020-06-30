@@ -1,4 +1,4 @@
-import React,{ useState, useEffect} from 'react';
+import React,{ useState, useEffect, Component} from 'react';
 import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import GaFormFunc from './components/GaFormFunc';
@@ -29,13 +29,13 @@ function App() {
     // <Container className="App">
     //   <GaViewSwitcher />
     // </Container>
-    <Container fluid className="App">
+    <div className="App">
       <GaResults plan={plan} />
-    </Container>
+    </div>
   ) : (
-      <Container className="App">
+      <div className="App">
           <GaFormFunc getPlan={plan => setPlan(plan)} />
-      </Container>
+      </div>
     );
 }
 

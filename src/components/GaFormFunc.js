@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
@@ -36,8 +37,7 @@ const GaFormFunc = ({getPlan}) => {
         
     }
     return(
-        // <div className="CenteringContainer">
-        <Row sm={12} md={12} lx={12} className="CenteringContainer">
+        <Container fluid="md" className="CenteringContainer">
             <Form className="programForm" onSubmit={handleSubmit} action="/ga_form">
                 <Form.Group as={Row}>
                     <Form.Label column sm={7} className="textAlignLeft">
@@ -69,10 +69,10 @@ const GaFormFunc = ({getPlan}) => {
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row}>
-                    <Form.Label column sm={5} className="textAlignLeft">
+                    <Form.Label column sm={7} className="textAlignLeft">
                         Goal Type
                         </Form.Label>
-                    <Col sm={7}>
+                    <Col sm={5}>
                         <Form.Control as="select" 
                             onChange={event=>setgoalType(event.target.value)}
                             defaultValue={goalType}>
@@ -102,7 +102,7 @@ const GaFormFunc = ({getPlan}) => {
                     </Col>
                 </Form.Group>
             </Form>
-        </Row >
+        </Container >
 
     )
 };
